@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<!--
+  Copyright 2010 Google Inc.
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+
+  Original slides: Marcin Wichary (mwichary@google.com)
+  Modifications: Ernest Delgado (ernestd@google.com)
+                 Alex Russell (slightlyoff@chromium.org)
+
+  landslide modifications: Adam Zapletal (adamzap@gmail.com)
+                           Nicolas Perriault (nperriault@gmail.com)
+-->
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Using AWS for CUDA</title>
+    <!-- Styles -->
+    
+    <link rel="stylesheet" media="screen, projection" href="css/screen.css">
+    
+    
+    <!-- /Styles -->
+    <!-- Javascripts -->
+    
+    <script type="text/javascript" src="js/slides.js"></script>
+    
+    
+    <!-- /Javascripts -->
+</head>
+<body>
+  <div id="blank"></div>
+  <div class="presentation">
+    <div id="current_presenter_notes">
+      <div id="presenter_note"></div>
+    </div>
+    <div class="slides">
+      
+      <!-- slide source: aws-cuda.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Using AWS for CUDA</h1></header>
+            
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="aws-cuda.md">aws-cuda.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              1/18
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: aws-cuda.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Creating the Instance</h1></header>
+            
+            
+            <section><p>This is how your AWS console should look like after you sign in.</p>
+<p><img alt="console" src="images/1.png" /></p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="aws-cuda.md">aws-cuda.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              2/18
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: aws-cuda.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Amazon EC2</h2></header>
+            
+            
+            <section><p>Select Amazon EC2 from the top-bar, and click on 'Launch Instance'.</p>
+<p><img alt="console" src="images/2.png" /></p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="aws-cuda.md">aws-cuda.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              3/18
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: aws-cuda.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Amazon EC2</h2></header>
+            
+            
+            <section><p>Select 'Classic Wizard' and click on Continue.</p>
+<p><img alt="console" src="images/3.png" /></p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="aws-cuda.md">aws-cuda.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              4/18
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: aws-cuda.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Instance Specifications</h2></header>
+            
+            
+            <section><p>Select 'Community AMI' and search for 'gpu'. Select the "CentOS 5.5 GPU HVM AMI". </p>
+<p><img alt="console" src="images/4.png" /></p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="aws-cuda.md">aws-cuda.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              5/18
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: aws-cuda.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Instance Specifications</h2></header>
+            
+            
+            <section><p>Set the 'Instance Type' as 'Cluster GPU'. </p>
+<p><img alt="console" src="images/5.png" /></p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="aws-cuda.md">aws-cuda.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              6/18
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: aws-cuda.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Instance Specifications</h2></header>
+            
+            
+            <section><p>Click on 'Continue'.</p>
+<p><img alt="console" src="images/6.png" /></p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="aws-cuda.md">aws-cuda.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              7/18
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: aws-cuda.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Instance Specifications</h2></header>
+            
+            
+            <section><p>Click on 'Continue'.</p>
+<p><img alt="console" src="images/7.png" /></p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="aws-cuda.md">aws-cuda.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              8/18
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: aws-cuda.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Instance Specifications</h2></header>
+            
+            
+            <section><p>Type in a name for the key pair, and click on 'Create &amp; Download Your Key Pair'.</p>
+<p><img alt="console" src="images/8.png" /></p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="aws-cuda.md">aws-cuda.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              9/18
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: aws-cuda.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Instance Specifications</h2></header>
+            
+            
+            <section><p>Set the Security Group as shown below to "default".</p>
+<p><img alt="console" src="images/9.png" /></p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="aws-cuda.md">aws-cuda.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              10/18
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: aws-cuda.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Review</h2></header>
+            
+            
+            <section><p>Verify the details and click on 'Launch'.</p>
+<p><img alt="review" src="images/10.png" /></p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="aws-cuda.md">aws-cuda.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              11/18
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: aws-cuda.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Confirmation</h2></header>
+            
+            
+            <section><p>You should receive this confirmation.</p>
+<p><img alt="confirmation" src="images/11.png" /></p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="aws-cuda.md">aws-cuda.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              12/18
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: aws-cuda.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Instance is Up!</h2></header>
+            
+            
+            <section><p>Your instance should be up and running in a couple of minutes.</p>
+<p><img alt="confirmation" src="images/12.png" /></p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="aws-cuda.md">aws-cuda.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              13/18
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: aws-cuda.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Note the Public DNS</h2></header>
+            
+            
+            <section><p>Select the instance, and scroll down the properties to see the 
+Public DNS of the instance.</p>
+<p><img alt="confirmation" src="images/13.png" /></p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="aws-cuda.md">aws-cuda.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              14/18
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: aws-cuda.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Instance Setup</h1></header>
+            
+            
+            <section><p>Here is how I ssh-ed into my instance, I fired up a terminal and typed the following command
+(please replace the host-name with the Public DNS entry that you have for your instance):</p>
+<pre><code>reddragon@reddragon-laptop:~$ ssh root@ec2-184-72-76-7.compute-1.amazonaws.com 
+-i amazon-gpu-key.pem
+</code></pre>
+<p>Once you are able to get into the account, update the packages:</p>
+<pre><code>[root@ip-10-17-144-169 ~]# yum update kernel kernel-devel kernel-headers
+</code></pre>
+<p>Install the following packages:</p>
+<pre><code>[root@ip-10-17-144-169 ~]# yum install mesa-libGLU-devel
+[root@ip-10-17-144-169 ~]# yum install libXi-devel
+[root@ip-10-17-144-169 ~]# yum install freeglut-devel
+</code></pre></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="aws-cuda.md">aws-cuda.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              15/18
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: aws-cuda.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Setting up CUDA</h2></header>
+            
+            
+            <section><p>We will update the CUDA driver, install the toolkit and the SDK on this instance. 
+The <a href="http://developer.nvidia.com/cuda-toolkit-41" title="CUDA Downloads page">CUDA Downloads page</a>
+has all the stuff we need, especially the <a href="http://developer.download.nvidia.com/compute/DevZone/docs/html/C/doc/CUDA_Getting_Started_Linux.pdf" title="CUDA Getting Started Linux Guide">CUDA Getting Started Linux Guide</a>.</p>
+<pre><code>[root@ip-10-17-144-169 ~]# wget http://developer.download.nvidia.com/compute/cuda/4_
+1/rel/drivers/NVIDIA-Linux-x86_64-285.05.33.run
+[root@ip-10-17-144-169 ~]# chmod +x NVIDIA-Linux-x86_64-285.05.33.run
+[root@ip-10-17-144-169 ~]# ./NVIDIA-Linux-x86_64-285.05.33.run
+
+[root@ip-10-17-144-169 ~]# wget http://developer.download.nvidia.com/compute/cuda/4_
+0/toolkit/cudatoolkit_4.0.17_linux_64_rhel5.5.run
+[root@ip-10-17-144-169 ~]# chmod +x cudatoolkit_4.0.17_linux_64_rhel5.5.run
+[root@ip-10-17-144-169 ~]# ./cudatoolkit_4.0.17_linux_64_rhel5.5.run
+
+[root@ip-10-17-144-169 ~]# wget http://developer.download.nvidia.com/compute/cuda/4_
+1/rel/sdk/gpucomputingsdk_4.1.28_linux.run
+[root@ip-10-17-144-169 ~]# chmod +x gpucomputingsdk_4.1.28_linux.run
+[root@ip-10-17-144-169 ~]# ./gpucomputingsdk_4.1.28_linux.run
+</code></pre>
+<p>Also set the PATH variable</p>
+<pre><code>[root@ip-10-17-144-169 bin]# export PATH=/usr/local/cuda/bin:$PATH
+</code></pre>
+<p>Change your directory to the SDK and make</p>
+<pre><code>[root@ip-10-17-144-169 bin]# cd NVIDIA_GPU_Computing_SDK/ &amp;&amp; make
+</code></pre></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="aws-cuda.md">aws-cuda.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              16/18
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: aws-cuda.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Running an Example</h2></header>
+            
+            
+            <section><p>Now cd into the bin/linux/release directory, and see if the examples are working</p>
+<pre><code>[root@ip-10-17-144-169 C]# cd bin/linux/release/
+[root@ip-10-17-144-169 C]# ./simpleMultiGPU
+</code></pre>
+<p>Your output should be like the following:</p>
+<pre><code>[simpleMultiGPU] starting...
+
+CUDA-capable device count: 2
+Generating input data...
+
+Computing with 2 GPU's...
+  GPU Processing time: 22.905001 (ms)
+
+Computing with Host CPU...
+
+Comparing GPU and Host CPU results...
+  GPU sum: 16777280.000000
+  CPU sum: 16777294.395033
+  Relative difference: 8.580068E-07
+
+[simpleMultiGPU] test results...
+PASSED
+
+&gt; exiting in 3 seconds: 3...2...1...done!
+</code></pre></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="aws-cuda.md">aws-cuda.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              17/18
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: aws-cuda.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Thank You</h1></header>
+            
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="aws-cuda.md">aws-cuda.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              18/18
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  
+  <div id="toc" class="sidebar hidden">
+    <h2>Table of Contents</h2>
+    <table>
+      <caption>Table of Contents</caption>
+      
+      <tr id="toc-row-1">
+        <th><a href="#slide1">Using AWS for CUDA</a></th>
+        <td><a href="#slide1">1</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-2">
+        <th><a href="#slide2">Creating the Instance</a></th>
+        <td><a href="#slide2">2</a></td>
+      </tr>
+      
+        
+        <tr id="toc-row-3" class="sub">
+          <th><a href="#slide3">Amazon EC2</a></th>
+          <td><a href="#slide3">3</a></td>
+        </tr>
+        
+        <tr id="toc-row-4" class="sub">
+          <th><a href="#slide4">Amazon EC2</a></th>
+          <td><a href="#slide4">4</a></td>
+        </tr>
+        
+        <tr id="toc-row-5" class="sub">
+          <th><a href="#slide5">Instance Specifications</a></th>
+          <td><a href="#slide5">5</a></td>
+        </tr>
+        
+        <tr id="toc-row-6" class="sub">
+          <th><a href="#slide6">Instance Specifications</a></th>
+          <td><a href="#slide6">6</a></td>
+        </tr>
+        
+        <tr id="toc-row-7" class="sub">
+          <th><a href="#slide7">Instance Specifications</a></th>
+          <td><a href="#slide7">7</a></td>
+        </tr>
+        
+        <tr id="toc-row-8" class="sub">
+          <th><a href="#slide8">Instance Specifications</a></th>
+          <td><a href="#slide8">8</a></td>
+        </tr>
+        
+        <tr id="toc-row-9" class="sub">
+          <th><a href="#slide9">Instance Specifications</a></th>
+          <td><a href="#slide9">9</a></td>
+        </tr>
+        
+        <tr id="toc-row-10" class="sub">
+          <th><a href="#slide10">Instance Specifications</a></th>
+          <td><a href="#slide10">10</a></td>
+        </tr>
+        
+        <tr id="toc-row-11" class="sub">
+          <th><a href="#slide11">Review</a></th>
+          <td><a href="#slide11">11</a></td>
+        </tr>
+        
+        <tr id="toc-row-12" class="sub">
+          <th><a href="#slide12">Confirmation</a></th>
+          <td><a href="#slide12">12</a></td>
+        </tr>
+        
+        <tr id="toc-row-13" class="sub">
+          <th><a href="#slide13">Instance is Up!</a></th>
+          <td><a href="#slide13">13</a></td>
+        </tr>
+        
+        <tr id="toc-row-14" class="sub">
+          <th><a href="#slide14">Note the Public DNS</a></th>
+          <td><a href="#slide14">14</a></td>
+        </tr>
+        
+      
+      
+      <tr id="toc-row-15">
+        <th><a href="#slide15">Instance Setup</a></th>
+        <td><a href="#slide15">15</a></td>
+      </tr>
+      
+        
+        <tr id="toc-row-16" class="sub">
+          <th><a href="#slide16">Setting up CUDA</a></th>
+          <td><a href="#slide16">16</a></td>
+        </tr>
+        
+        <tr id="toc-row-17" class="sub">
+          <th><a href="#slide17">Running an Example</a></th>
+          <td><a href="#slide17">17</a></td>
+        </tr>
+        
+      
+      
+      <tr id="toc-row-18">
+        <th><a href="#slide18">Thank You</a></th>
+        <td><a href="#slide18">18</a></td>
+      </tr>
+      
+      
+    </table>
+  </div>
+  
+  <div id="help" class="sidebar hidden">
+    <h2>Help</h2>
+    <table>
+      <caption>Help</caption>
+      <tr>
+        <th>Table of Contents</th>
+        <td>t</td>
+      </tr>
+      <tr>
+        <th>Exposé</th>
+        <td>ESC</td>
+      </tr>
+      <tr>
+        <th>Full screen slides</th>
+        <td>e</td>
+      </tr>
+      <tr>
+        <th>Presenter View</th>
+        <td>p</td>
+      </tr>
+      <tr>
+        <th>Source Files</th>
+        <td>s</td>
+      </tr>
+      <tr>
+        <th>Slide Numbers</th>
+        <td>n</td>
+      </tr>
+      <tr>
+        <th>Toggle screen blanking</th>
+        <td>b</td>
+      </tr>
+      <tr>
+        <th>Show/hide slide context</th>
+        <td>c</td>
+      </tr>
+      <tr>
+        <th>Notes</th>
+        <td>2</td>
+      </tr>
+      <tr>
+        <th>Help</th>
+        <td>h</td>
+      </tr>
+    </table>
+  </div>
+  <script>main()</script>
+</body>
+</html>

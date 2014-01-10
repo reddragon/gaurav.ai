@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<!--
+  Copyright 2010 Google Inc.
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+
+  Original slides: Marcin Wichary (mwichary@google.com)
+  Modifications: Ernest Delgado (ernestd@google.com)
+                 Alex Russell (slightlyoff@chromium.org)
+
+  landslide modifications: Adam Zapletal (adamzap@gmail.com)
+                           Nicolas Perriault (nperriault@gmail.com)
+-->
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Using AWS for Hadoop</title>
+    <!-- Styles -->
+    <link rel="stylesheet" media="screen, projection" href="css/screen.css">
+    
+    
+    <!-- /Styles -->
+    <!-- Javascripts -->
+    
+    <script type="text/javascript" src="js/slides.js"></script>
+    
+    
+    <!-- /Javascripts -->
+</head>
+<body>
+  <div id="blank"></div>
+  <div class="presentation">
+    <div id="current_presenter_notes">
+      <div id="presenter_note"></div>
+    </div>
+    <div class="slides">
+      
+      <!-- slide source: aws-hadoop.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Using AWS for Hadoop</h1></header>
+            
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="aws-hadoop.md">aws-hadoop.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              1/20
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: aws-hadoop.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Important Note</h1></header>
+            
+            
+            <section><ul>
+<li>
+<p>It would probably be convenient for you to set up Hadoop on your machine, and use EC2 instances
+for testing before submission. This would also keep the AWS budget on track. </p>
+</li>
+<li>
+<p>For Ubuntu 10.04+
+<a href="http://www.michael-noll.com/tutorials/running-hadoop-on-ubuntu-linux-single-node-cluster/">this</a> is a
+good tutorial. (Courtesy: Deepak Nettem).</p>
+</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="aws-hadoop.md">aws-hadoop.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              2/20
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: aws-hadoop.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Creating the Instance</h1></header>
+            
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="aws-hadoop.md">aws-hadoop.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              3/20
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: aws-hadoop.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Creating the Instance</h1></header>
+            
+            
+            <section><ul>
+<li>
+<p>In this tutorial, we will set up an instance from an Amazon Machine Image (AMI) that I have created. </p>
+</li>
+<li>
+<p>If you want to set up an instance on your own, you have to:</p>
+</li>
+<li>Select 'Launch Instance' in the AWS console and select 'Classic Wizard'</li>
+<li>Select 'Community AMI'</li>
+<li>Select an AMI of your choice (ami-3e9b4957 for Ubuntu 10.04)</li>
+<li>SSH into your machine</li>
+<li>Follow a standard tutorial to setup Hadoop on your OS.</li>
+<li>For Ubuntu 10.04, follow <a href="http://www.michael-noll.com/tutorials/running-hadoop-on-ubuntu-linux-single-node-cluster/">this</a> excellent tutorial, which I used. (Courtesy: Deepak N)</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="aws-hadoop.md">aws-hadoop.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              4/20
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: aws-hadoop.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Creating the Instance</h1></header>
+            
+            
+            <section><p>As usual, log on to AWS, and click on 'Launch Instance', and choose 
+'Classic Wizard'. Select 'Community AMI', and search for '844f9ded'</p>
+<p><img alt="console" src="images/1.png" /></p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="aws-hadoop.md">aws-hadoop.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              5/20
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: aws-hadoop.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Creating the Instance</h1></header>
+            
+            
+            <section><p>Set the Instance Type as 'Small'. (The Micro instance has too less RAM for 
+our purpose).</p>
+<p><img alt="console" src="images/2.png" /></p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="aws-hadoop.md">aws-hadoop.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              6/20
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: aws-hadoop.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Creating the Instance</h1></header>
+            
+            
+            <section><p>Click on 'Continue'.</p>
+<p><img alt="console" src="images/3.png" /></p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="aws-hadoop.md">aws-hadoop.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              7/20
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: aws-hadoop.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Creating the Instance</h1></header>
+            
+            
+            <section><p>Click on 'Continue'.</p>
+<p><img alt="console" src="images/4.png" /></p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="aws-hadoop.md">aws-hadoop.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              8/20
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: aws-hadoop.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Creating the Instance</h1></header>
+            
+            
+            <section><p>As we did earlier, select the appropriate Key Pair.</p>
+<p><img alt="console" src="images/5.png" /></p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="aws-hadoop.md">aws-hadoop.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              9/20
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: aws-hadoop.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Creating the Instance</h1></header>
+            
+            
+            <section><p>Set the 'Security Group' as 'default'.</p>
+<p><img alt="console" src="images/6.png" /></p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="aws-hadoop.md">aws-hadoop.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              10/20
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: aws-hadoop.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Creating the Instance</h1></header>
+            
+            
+            <section><p>Review and click on 'Launch'.</p>
+<p><img alt="console" src="images/7.png" /></p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="aws-hadoop.md">aws-hadoop.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              11/20
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: aws-hadoop.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Creating the Instance</h1></header>
+            
+            
+            <section><p>Click on 'Close'. Your instance should be up and running in a couple of minutes.</p>
+<p><img alt="console" src="images/8.png" /></p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="aws-hadoop.md">aws-hadoop.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              12/20
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: aws-hadoop.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Finishing Hadoop Setup</h1></header>
+            
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="aws-hadoop.md">aws-hadoop.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              13/20
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: aws-hadoop.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Finishing Hadoop Setup</h1></header>
+            
+            
+            <section><p>Now, using the Public DNS as we had done earlier, SSH into your account. Recall
+that this information is available in the AWS console under your instance.</p>
+<pre><code>reddragon@reddragon-laptop:~$ ssh ubuntu@ec2-23-20-122-224.compute-1.amazonaws.com 
+-i amazon-gpu.pem
+</code></pre></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="aws-hadoop.md">aws-hadoop.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              14/20
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: aws-hadoop.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Finishing Hadoop Setup</h1></header>
+            
+            
+            <section><p>Hadoop is installed in the directory /usr/local/hadoop in the system. I have created a
+user 'hduser' which has the permissions to access Hadoop and the directory. To use 
+Hadoop, you need to login with the username 'hduser' and password 'hadoop'.</p>
+<pre><code>ubuntu@domU-12-31-39-04-71-C8:~$ su - hduser
+Password:
+</code></pre></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="aws-hadoop.md">aws-hadoop.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              15/20
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: aws-hadoop.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Finishing Hadoop Setup</h1></header>
+            
+            
+            <section><p>Now for the first time you need to create a public key-pair,</p>
+<pre><code>hduser@domU-12-31-39-04-71-C8:~$ ssh-keygen -t rsa -P ""
+Generating public/private rsa key pair.
+Enter file in which to save the key (/home/hduser/.ssh/id_rsa): 
+Your identification has been saved in /home/hduser/.ssh/id_rsa.
+Your public key has been saved in /home/hduser/.ssh/id_rsa.pub.
+The key fingerprint is:
+...
+</code></pre>
+<p>add the key to the authorized_keys file,</p>
+<pre><code>hduser@domU-12-31-39-04-71-C8:~$ cat $HOME/.ssh/id_rsa.pub &gt;&gt; $HOME/.ssh/authorized_
+keys
+</code></pre>
+<p>and SSH into localhost.</p>
+<pre><code>hduser@domU-12-31-39-04-71-C8:~$ ssh localhost
+The authenticity of host 'localhost (127.0.0.1)' can't be established.
+RSA key fingerprint is 47:ac:d9:5f:be:9f:c2:c7:ae:98:e5:14:dc:0a:69:ee.
+Are you sure you want to continue connecting (yes/no)? yes
+</code></pre></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="aws-hadoop.md">aws-hadoop.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              16/20
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: aws-hadoop.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Using Hadoop</h1></header>
+            
+            
+            <section><p>Everytime you need to use Hadoop, we need to follow these steps:</p>
+<p>Login as hduser:</p>
+<pre><code>ubuntu@domU-12-31-39-04-71-C8:~$ su - hduser
+Password:
+</code></pre>
+<p>Start All Hadoop Utilities:</p>
+<pre><code>hduser@domU-12-31-39-04-71-C8:~$ start-all.sh 
+starting namenode, logging to ...   
+localhost: starting datanode, logging to ...
+localhost: starting secondarynamenode, logging to ...
+starting jobtracker, logging to ...
+localhost: starting tasktracker, logging to ...
+</code></pre>
+<p>Check that the output of ('jps') is as follows:</p>
+<pre><code>hduser@domU-12-31-39-04-71-C8:~$ jps
+1478 TaskTracker
+1118 DataNode
+988 NameNode
+1329 JobTracker
+1632 Jps
+1273 SecondaryNameNode
+</code></pre></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="aws-hadoop.md">aws-hadoop.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              17/20
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: aws-hadoop.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Starting a Hadoop Job</h1></header>
+            
+            
+            <section><p>Here we start an example Hadoop Job:</p>
+<pre><code>hduser@domU-12-31-39-04-71-C8:~$ hadoop jar 
+/usr/local/hadoop/hadoop-examples-0.20.203.0.jar pi 2 2
+Number of Maps  = 2
+Samples per Map = 2
+Wrote input for Map #0
+Wrote input for Map #1
+Starting Job
+12/02/29 05:52:12 INFO mapred.FileInputFormat: Total input paths to process : 2
+12/02/29 05:52:13 INFO mapred.JobClient: Running job: job_201202290550_0001
+12/02/29 05:52:14 INFO mapred.JobClient:  map 0% reduce 0%
+12/02/29 05:52:32 INFO mapred.JobClient:  map 100% reduce 0%
+12/02/29 05:52:48 INFO mapred.JobClient:  map 100% reduce 100%
+...
+12/02/29 05:52:53 INFO mapred.JobClient:     Combine output records=0
+12/02/29 05:52:53 INFO mapred.JobClient:     Reduce output records=0
+12/02/29 05:52:53 INFO mapred.JobClient:     Map output records=4
+Job Finished in 40.538 seconds
+Estimated value of Pi is 4.00000000000000000000
+</code></pre></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="aws-hadoop.md">aws-hadoop.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              18/20
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: aws-hadoop.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Finishing Up</h1></header>
+            
+            
+            <section><p>For more information, refer to Hadoop development guides. </p>
+<p>When you are done, stop the Hadoop processes.</p>
+<pre><code>hduser@domU-12-31-39-04-71-C8:~$ stop-all.sh
+</code></pre>
+<p>After finishing up your work, make sure you 'Stop' your instance in AWS. </p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="aws-hadoop.md">aws-hadoop.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              19/20
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: aws-hadoop.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Thank You</h1></header>
+            
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="aws-hadoop.md">aws-hadoop.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              20/20
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  
+  <div id="toc" class="sidebar hidden">
+    <h2>Table of Contents</h2>
+    <table>
+      <caption>Table of Contents</caption>
+      
+      <tr id="toc-row-1">
+        <th><a href="#slide1">Using AWS for Hadoop</a></th>
+        <td><a href="#slide1">1</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-2">
+        <th><a href="#slide2">Important Note</a></th>
+        <td><a href="#slide2">2</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-3">
+        <th><a href="#slide3">Creating the Instance</a></th>
+        <td><a href="#slide3">3</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-4">
+        <th><a href="#slide4">Creating the Instance</a></th>
+        <td><a href="#slide4">4</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-5">
+        <th><a href="#slide5">Creating the Instance</a></th>
+        <td><a href="#slide5">5</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-6">
+        <th><a href="#slide6">Creating the Instance</a></th>
+        <td><a href="#slide6">6</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-7">
+        <th><a href="#slide7">Creating the Instance</a></th>
+        <td><a href="#slide7">7</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-8">
+        <th><a href="#slide8">Creating the Instance</a></th>
+        <td><a href="#slide8">8</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-9">
+        <th><a href="#slide9">Creating the Instance</a></th>
+        <td><a href="#slide9">9</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-10">
+        <th><a href="#slide10">Creating the Instance</a></th>
+        <td><a href="#slide10">10</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-11">
+        <th><a href="#slide11">Creating the Instance</a></th>
+        <td><a href="#slide11">11</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-12">
+        <th><a href="#slide12">Creating the Instance</a></th>
+        <td><a href="#slide12">12</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-13">
+        <th><a href="#slide13">Finishing Hadoop Setup</a></th>
+        <td><a href="#slide13">13</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-14">
+        <th><a href="#slide14">Finishing Hadoop Setup</a></th>
+        <td><a href="#slide14">14</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-15">
+        <th><a href="#slide15">Finishing Hadoop Setup</a></th>
+        <td><a href="#slide15">15</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-16">
+        <th><a href="#slide16">Finishing Hadoop Setup</a></th>
+        <td><a href="#slide16">16</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-17">
+        <th><a href="#slide17">Using Hadoop</a></th>
+        <td><a href="#slide17">17</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-18">
+        <th><a href="#slide18">Starting a Hadoop Job</a></th>
+        <td><a href="#slide18">18</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-19">
+        <th><a href="#slide19">Finishing Up</a></th>
+        <td><a href="#slide19">19</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-20">
+        <th><a href="#slide20">Thank You</a></th>
+        <td><a href="#slide20">20</a></td>
+      </tr>
+      
+      
+    </table>
+  </div>
+  
+  <div id="help" class="sidebar hidden">
+    <h2>Help</h2>
+    <table>
+      <caption>Help</caption>
+      <tr>
+        <th>Table of Contents</th>
+        <td>t</td>
+      </tr>
+      <tr>
+        <th>Exposé</th>
+        <td>ESC</td>
+      </tr>
+      <tr>
+        <th>Full screen slides</th>
+        <td>e</td>
+      </tr>
+      <tr>
+        <th>Presenter View</th>
+        <td>p</td>
+      </tr>
+      <tr>
+        <th>Source Files</th>
+        <td>s</td>
+      </tr>
+      <tr>
+        <th>Slide Numbers</th>
+        <td>n</td>
+      </tr>
+      <tr>
+        <th>Toggle screen blanking</th>
+        <td>b</td>
+      </tr>
+      <tr>
+        <th>Show/hide slide context</th>
+        <td>c</td>
+      </tr>
+      <tr>
+        <th>Notes</th>
+        <td>2</td>
+      </tr>
+      <tr>
+        <th>Help</th>
+        <td>h</td>
+      </tr>
+    </table>
+  </div>
+  <script>main()</script>
+</body>
+</html>
