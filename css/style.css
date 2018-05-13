@@ -1,0 +1,87 @@
+a {
+	text-decoration: none;
+	color: #0a64cc;
+}
+
+body {
+	font-family: "Gill Sans Light", Avenir, Arial, Helvetica, sans-serif;
+	font-size: 18px;
+  margin: 40px 325px 40px 325px;
+  color: #313233;
+}
+
+hr {
+    margin-top: 1.5em;
+    margin-bottom: 1.5em;
+    border-width: 0.6px;
+}
+
+img {
+	padding: 0px 5px 0px 0px;
+}
+
+.big-font {
+  font-size: 30px;
+}
+
+.medium-font {
+  font-size: 20px;
+}
+
+.circular {
+  border-radius: 50%;
+}
+
+.pg {
+	margin: 40px 220px 40px 220px;
+}
+
+.pgtitle {
+	font-size: 30px;
+	padding: 1px 1px 2px 1px;
+}
+
+.pgnav {
+	margin: 0 auto;
+	padding: 5px 0px 2px 0px;
+}
+
+.pgnav ul {
+	margin: 0;
+	padding: 0 0 0 0;
+	list-style: none;
+}
+
+.pgnav li {
+	float: left;
+	padding: 0px 10px 0 0;
+}
+
+.pgnav a {
+	font-size: 14px;
+}
+
+.pgcontent {
+	padding: 30px 1px 1px 1px;
+}
+
+.sectitle {
+	font-size: 18px;
+	border-bottom: 1px solid #E5E5E6;
+	padding: 1px 1px 2px 1px;
+}
+
+.sectext {
+	padding: 8px 0px 30px 0px;
+	line-height: 150%;
+}
+
+ul.plain-list {
+	list-style: none;
+	padding: 0px 0px 0px 20px;
+}
+
+
+ol.plain-list {
+	padding: 0px 0px 0px 20px;
+}
