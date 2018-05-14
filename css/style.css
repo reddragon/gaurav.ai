@@ -10,6 +10,12 @@ body {
   color: #313233;
 }
 
+@media only screen and (max-device-width: 480px) {
+  body {
+    margin: 3% 5% 3% 5%;
+  }
+}
+
 hr {
     margin-top: 1.5em;
     margin-bottom: 1.5em;
